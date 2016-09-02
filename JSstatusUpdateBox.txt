@@ -1,0 +1,40 @@
+var main = function() {
+    /*function of the Post box*/
+    $('.btn').click( function() {
+        /*sets content to a variable*/
+        var post = $('.status-box').val();
+        /*appends entry in 'posts' class as a list item*/
+        $('<li>').text(post).prependTo('.posts');
+        /*clears text in box*/
+        $('.status-box').val('');
+        
+        /*resetting number of characters to 140*/
+        $('.counter').text(140);
+        
+        /*disables Post button after posting*/
+        $('.btn').addClass('disabled')
+        
+    });
+    
+    /*counts post length and updates the number of characters used*/
+    $('.status-box').keyup(function() {
+        var postLength = $(this).val().length;
+        var charactersLeft = 140-postLength;
+        $('.counter').text(charactersLeft);
+        
+        /*checks if post is between 1-140 characters long*/
+        if (charactersLeft<0) {
+            $('.btn').addClass('disabled')
+        } else if (charactersLeft==140) {
+            $('.btn').addClass('disabled')
+        } else {
+            $('.btn').removeClass('disabled');
+        };
+    });
+    
+    /*disables Post button so that no empty postings occur*/
+    $('.btn').addClass('disabled')
+    
+};
+
+$(document).ready(main);
